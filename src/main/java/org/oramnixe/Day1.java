@@ -63,7 +63,7 @@ public class Day1 {
             var direction = inputFileContent.get(i).charAt(0);
             int numberOfRotation = Integer.parseInt(inputFileContent.get(i).substring(1));
 
-            IO.println("Direction = " + direction + " and number of rotations = " + numberOfRotation);
+            //IO.println("Direction = " + direction + " and number of rotations = " + numberOfRotation);
             if (direction == 'R') {
                 position += numberOfRotation;
                 while (position >= 100) {
@@ -76,11 +76,11 @@ public class Day1 {
                 }
             }
 
-            IO.println("new position = " + position);
+            //IO.println("new position = " + position);
             if (position == 0) password++;
         }
 
-        System.out.println("Part 1 result : " + password);
+        IO.println("Part 1 result : " + password);
     }
 
     private void solvePart2() {
