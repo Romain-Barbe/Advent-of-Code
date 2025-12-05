@@ -22,7 +22,38 @@ public class Day1 {
         System.out.println("--------------------------------------------------");
     }
 
-    private void solve() {
+    public static class Dial {
+        Integer position;
+
+        public Dial(Integer position) {
+            this.position = position;
+        }
+
+        // This method return the number of times the dial passed the 0 number
+        public Integer rotate(String direction, Integer numberOfRotations) {
+            Integer numberOfTimesPassedOnTheZero = 0;
+            for (int i = 0; i < numberOfRotations; i++) {
+                if (direction.equals("R")) {
+                    this.position++;
+                    if (this.position == 100) {
+                        this.position = 0;
+                    }
+                } else {
+                    this.position--;
+                    if (this.position == -1) {
+                        this.position = 99;
+                    }
+                }
+
+                if (this.position == 0) {
+                    numberOfTimesPassedOnTheZero++;
+                }
+            }
+            return  numberOfTimesPassedOnTheZero;
+        }
+    }
+
+    private void solvePart1() {
         IO.println(inputFileContent);
 
         int position = 50; // The dial is always pointing at 50 at the start
@@ -32,26 +63,32 @@ public class Day1 {
             var direction = inputFileContent.get(i).charAt(0);
             int numberOfRotation = Integer.parseInt(inputFileContent.get(i).substring(1));
 
-            //IO.println("Direction = " + direction + " and number of rotations = " + numberOfRotation);
+            IO.println("Direction = " + direction + " and number of rotations = " + numberOfRotation);
             if (direction == 'R') {
                 position += numberOfRotation;
                 while (position >= 100) {
                     position -= 100;
-                    //password ++;
                 }
             } else {
                 position -= numberOfRotation;
                 while (position < 0) {
                     position += 100;
-                    //password ++;
                 }
             }
 
-            //IO.println("new position = " + position);
+            IO.println("new position = " + position);
             if (position == 0) password++;
         }
 
         System.out.println("Part 1 result : " + password);
-        /*System.out.println("Part 2 result : " + finalSimilarityScore);*/
+    }
+
+    private void solvePart2() {
+        IO.println(inputFileContent);
+
+        var startingPosition = 50;
+        Dial dial = new Dial(startingPosition);
+
+
     }
 }
