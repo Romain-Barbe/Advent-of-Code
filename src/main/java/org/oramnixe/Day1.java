@@ -4,23 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Day1 {
-    private final ArrayList<String> inputFileContent;
-
-    public Day1(ArrayList<String> inputFileContent) {
-        this.inputFileContent = inputFileContent;
-    }
-
     static void main() throws IOException {
         int dayNumber = 1;
+        ArrayList<String> testInputFileContent = Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + "Test.txt");
+        ArrayList<String> realDataInputFileContent = Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + ".txt");
+
         System.out.println("DAY " + dayNumber + " TEST :");
-        Day1 test1 = new Day1(Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + "Test.txt"));
-        test1.solvePart1();
-        test1.solvePart2();
+        solvePart1(testInputFileContent);
+        solvePart2(testInputFileContent);
         System.out.println("--------------------------------------------------");
         System.out.println("DAY " + dayNumber + " REAL DATA :");
-        Day1 realData = new Day1(Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + ".txt"));
-        realData.solvePart1();
-        realData.solvePart2();
+        solvePart1(realDataInputFileContent);
+        solvePart2(realDataInputFileContent);
         System.out.println("--------------------------------------------------");
     }
 
@@ -57,7 +52,7 @@ public class Day1 {
         }
     }
 
-    private void solvePart1() {
+    private static void solvePart1(ArrayList<String> inputFileContent) {
         IO.println(inputFileContent);
 
         int position = 50; // The dial is always pointing at 50 at the start
@@ -87,7 +82,7 @@ public class Day1 {
         IO.println("Part 1 result : " + password);
     }
 
-    private void solvePart2() {
+    private static void solvePart2(ArrayList<String> inputFileContent) {
         IO.println(inputFileContent);
 
         var startingPosition = 50;
