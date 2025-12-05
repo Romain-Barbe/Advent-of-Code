@@ -14,11 +14,13 @@ public class Day1 {
         int dayNumber = 1;
         System.out.println("DAY " + dayNumber + " TEST :");
         Day1 test1 = new Day1(Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + "Test.txt"));
-        test1.solve();
+        test1.solvePart1();
+        test1.solvePart2();
         System.out.println("--------------------------------------------------");
         System.out.println("DAY " + dayNumber + " REAL DATA :");
         Day1 realData = new Day1(Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + ".txt"));
-        realData.solve();
+        realData.solvePart1();
+        realData.solvePart2();
         System.out.println("--------------------------------------------------");
     }
 
@@ -46,9 +48,11 @@ public class Day1 {
                 }
 
                 if (this.position == 0) {
+                    //IO.println("position passed to 0");
                     numberOfTimesPassedOnTheZero++;
                 }
             }
+            //IO.println("new position = " + position);
             return  numberOfTimesPassedOnTheZero;
         }
     }
@@ -87,8 +91,19 @@ public class Day1 {
         IO.println(inputFileContent);
 
         var startingPosition = 50;
+        int password = 0; // Number of times the dial passed at 0 during the rotation
+
         Dial dial = new Dial(startingPosition);
 
+        for (int i = 0; i <= inputFileContent.size() - 1; i++) {
+            var direction = inputFileContent.get(i).charAt(0);
+            int numberOfRotation = Integer.parseInt(inputFileContent.get(i).substring(1));
 
+            //IO.println("Direction = " + direction + " and number of rotations = " + numberOfRotation);
+
+            password += dial.rotate(String.valueOf(direction), numberOfRotation);
+        }
+
+        IO.println("Part 2 result : " + password);
     }
 }
