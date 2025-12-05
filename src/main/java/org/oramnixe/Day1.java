@@ -53,7 +53,7 @@ public class Day1 {
                 }
             }
             //IO.println("new position = " + position);
-            return  numberOfTimesPassedOnTheZero;
+            return numberOfTimesPassedOnTheZero;
         }
     }
 
