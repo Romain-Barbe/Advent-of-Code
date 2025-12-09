@@ -8,14 +8,14 @@ public class Day3 {
     static void main() throws IOException {
         int dayNumber = 3;
         ArrayList<String> testInputFileContent = Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + "Test.txt");
-        //ArrayList<String> realDataInputFileContent = Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + ".txt");
+        ArrayList<String> realDataInputFileContent = Utils.readInputFile("inputs/day" + dayNumber + "/day" + dayNumber + ".txt");
 
         System.out.println("DAY " + dayNumber + " TEST :");
         solvePart1(testInputFileContent);
         //solvePart2(testInputFileContent);
         System.out.println("--------------------------------------------------");
         System.out.println("DAY " + dayNumber + " REAL DATA :");
-        //solvePart1(realDataInputFileContent);
+        solvePart1(realDataInputFileContent);
         //solvePart2(realDataInputFileContent);
         System.out.println("--------------------------------------------------");
     }
@@ -33,32 +33,45 @@ public class Day3 {
             int secondGreaterNumber = 0;
             int secondGreaterNumberPosition = 0;
 
-            var test = line.split("");
-            for (var test2 : test) {
-                IO.println(test2);
-            }
+            var lineSplitted = line.split("");
 
-            for (int i = line.length() - 1; i > 0; i--) {
-                Integer actualNumber = Integer.valueOf(line.charAt(i));
-                IO.println("\tactual number = " + actualNumber);
+            int i = 0;
+            for (String actualNumberString : lineSplitted) {
+                int actualNumber = Integer.parseInt(actualNumberString);
+                //IO.println("\tactual number = " + actualNumber);
                 if (actualNumber > greaterNumber) {
-                    IO.println("\t\tle plus grand");
-                    secondGreaterNumber = greaterNumber;
-                    secondGreaterNumberPosition = greaterNumberPosition;
+                    //IO.println("\t\tle plus grand");
+                    if(lineSplitted.length > (i + 1)){
+                        secondGreaterNumber = 0;
+                        secondGreaterNumberPosition = 0;
+                    } else {
+                        secondGreaterNumber = greaterNumber;
+                        secondGreaterNumberPosition = greaterNumberPosition;
+                    }
+
                     greaterNumber = actualNumber;
                     greaterNumberPosition = i;
                 } else if (actualNumber > secondGreaterNumber) {
-                    IO.println("\t\tle second plus grand");
+                    //IO.println("\t\tle second plus grand");
                     secondGreaterNumber = actualNumber;
                     secondGreaterNumberPosition = i;
                 }
-
-                IO.println("\tgreaterNumber: " + greaterNumber);
-                IO.println("\tsecondGreaterNumber: " + secondGreaterNumber);
+                i++;
             }
+
+            //IO.println("\tFINAL greaterNumber : " + greaterNumber + " at position : " + greaterNumberPosition);
+            //IO.println("\tFINAL secondGreaterNumber : " + secondGreaterNumber + " at position : " + secondGreaterNumberPosition);
+            String result;
+            if (greaterNumberPosition < secondGreaterNumberPosition) {
+                result = greaterNumber + "" + secondGreaterNumber;
+                IO.println("\tTOTAL => " + result);
+            } else {
+                result = secondGreaterNumber + "" + greaterNumber;
+                IO.println("\tTOTAL => " + result);
+            }
+
+            solution = solution.add(new BigInteger(result));
         }
-
-
 
         IO.println("Part 1 result : " + solution);
     }
